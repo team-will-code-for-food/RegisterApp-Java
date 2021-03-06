@@ -1,3 +1,14 @@
+img.footer {
+	z-index: 1;
+	height: 50px;
+    text-decoration: none;
+    display: inline-block;
+	cursor: pointer;
+	position: fixed;
+	right: 20;
+	bottom: 20;
+}
+
 div.header {
 	padding-top: 1px;
 	text-align: right;

@@ -5,4 +5,5 @@ HELP.md
 mvnw
 mvnw.cmd
 target/
+.DS_Store
 
