@@ -1,3 +1,5 @@
+// This will create a new employee
+
 package edu.uark.registerapp.commands.employees;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +20,7 @@ public class EmployeeCreateCommand implements ResultCommandInterface<Employee> {
 	public Employee execute() {
 		this.validateProperties();
 
+		// If this is the first employee to be added and make them the general manager
 		if (this.isInitialEmployee) {
 			this.apiEmployee.setClassification(
 				EmployeeClassification.GENERAL_MANAGER.getClassification());
@@ -31,6 +34,7 @@ public class EmployeeCreateCommand implements ResultCommandInterface<Employee> {
 		this.apiEmployee.setId(employeeEntity.getId());
 		// Only send the password over the network when modifying the database.
 		this.apiEmployee.setPassword(StringUtils.EMPTY);
+		// Only send the password over the network when modifying the database.
 		this.apiEmployee.setCreatedOn(employeeEntity.getCreatedOn());
 		this.apiEmployee.setEmployeeId(
 			EmployeeHelper.padEmployeeId(
@@ -40,6 +44,8 @@ public class EmployeeCreateCommand implements ResultCommandInterface<Employee> {
 	}
 
 	// Helper methods
+	// This checks the fields on the view. 
+	// Will not accept if any of the fields are blank.
 	private void validateProperties() {
 		if (StringUtils.isBlank(this.apiEmployee.getFirstName())) {
 			throw new UnprocessableEntityException("first name");
@@ -51,6 +57,7 @@ public class EmployeeCreateCommand implements ResultCommandInterface<Employee> {
 			throw new UnprocessableEntityException("password");
 		}
 
+		// If there is a single employee in the DB then select a position for the new addition
 		if (!this.isInitialEmployee
 			&& (EmployeeClassification.map(this.apiEmployee.getClassification()) == EmployeeClassification.NOT_DEFINED)) {
 
@@ -58,7 +65,7 @@ public class EmployeeCreateCommand implements ResultCommandInterface<Employee> {
 		}
 	}
 
-	// Properties
+	// Getters and Setters for the new employee
 	private Employee apiEmployee;
 	public Employee getApiEmployee() {
 		return this.apiEmployee;
@@ -68,6 +75,7 @@ public class EmployeeCreateCommand implements ResultCommandInterface<Employee> {
 		return this;
 	}
 
+	// Getters and Setters for the first employee, the general manager.
 	private boolean isInitialEmployee;
 	public boolean getIsInitialEmployee() {
 		return this.isInitialEmployee;

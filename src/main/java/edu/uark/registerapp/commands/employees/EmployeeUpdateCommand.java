@@ -1,3 +1,5 @@
+// This will update an employee
+
 package edu.uark.registerapp.commands.employees;
 
 import java.util.Optional;
@@ -28,7 +30,7 @@ public class EmployeeUpdateCommand implements ResultCommandInterface<Employee> {
 		return this.apiEmployee;
 	}
 
-	// Helper methods
+	// Exceptions for empty fields
 	private void validateProperties() {
 		if (StringUtils.isBlank(this.apiEmployee.getFirstName())) {
 			throw new UnprocessableEntityException("first name");
@@ -56,7 +58,7 @@ public class EmployeeUpdateCommand implements ResultCommandInterface<Employee> {
 		this.employeeRepository.save(queriedEmployeeEntity.get()); // Write, via an UPDATE, any changes to the database.
 	}
 
-	// Properties
+	// Getter and Setters for the universally unique Identifies that tuple
 	private UUID employeeId;
 	public UUID getEmployeeId() {
 		return this.employeeId;
@@ -66,6 +68,7 @@ public class EmployeeUpdateCommand implements ResultCommandInterface<Employee> {
 		return this;
 	}
 
+	// Getters and Setters for the API
 	private Employee apiEmployee;
 	public Employee getApiEmployee() {
 		return this.apiEmployee;
