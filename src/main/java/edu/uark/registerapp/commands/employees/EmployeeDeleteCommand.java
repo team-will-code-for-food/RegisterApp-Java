@@ -1,3 +1,5 @@
+// This will delete an employee by their employee ID
+
 package edu.uark.registerapp.commands.employees;
 
 import java.util.Optional;
@@ -18,16 +20,16 @@ public class EmployeeDeleteCommand implements VoidCommandInterface {
 	@Override
 	public void execute() {
 		final Optional<EmployeeEntity> employeeEntity =
-			this.employeeRepository.findById(this.employeeId);
+			this.employeeRepository.findById(this.employeeId);// Find the employee first
 
 		if (!employeeEntity.isPresent()) { // No record with the associated record ID exists in the database.
 			throw new NotFoundException("Product");
 		}
 
-		this.employeeRepository.delete(employeeEntity.get());
+		this.employeeRepository.delete(employeeEntity.get()); // Delete the employee if found
 	}
 
-	// Properties
+	// Getters and Setters
 	private UUID employeeId;
 	public UUID getEmployeeId() {
 		return this.employeeId;

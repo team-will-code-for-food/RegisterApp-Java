@@ -192,3 +192,15 @@ function signOutActionClickHandler() {
 	});
 }
 //End sign out
+
+// Menu button function
+document.addEventListener("DOMContentLoaded", function(event) {
+	goToMenu().addEventListener(
+		"click",
+		() => { window.location.assign("/mainMenu"); });
+});
+
+function goToMenu()
+{
+	return document.getElementById("menuButton");
+}

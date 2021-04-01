@@ -1,3 +1,5 @@
+// Find employee by Id
+
 package edu.uark.registerapp.commands.employees;
 
 import java.util.Optional;
@@ -26,7 +28,7 @@ public class EmployeeQuery implements ResultCommandInterface<Employee> {
 		}
 	}
 
-	// Properties
+	// Getters and setters
 	private UUID employeeId;
 	public UUID getEmployeeId() {
 		return this.employeeId;
