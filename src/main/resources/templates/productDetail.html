@@ -55,11 +55,11 @@
 		<div class="productActionsWrapper" th:class="(not ${isElevatedUser} OR not ${#strings.isEmpty(errorMessage)}) ? hidden : ''">
 			<br />
 			<div id="deleteActionContainer" th:class="${product.isEmpty} ? hidden : ''">
-				<button id="deleteButton" type="button" class="action">Delete</button>
+				<button id="deleteButton" type="button" class="action container" >Delete</button>
 				<br />
 				<br />
 			</div>
-			<button id="saveButton" type="button" class="action">Save</button>
+			<button id="saveButton" type="button" class="action container">Save</button>
 		</div>
 
 		<div id="productSavedAlertModal" class="modal animate-opacity-show">
@@ -75,7 +75,7 @@
 	</div>
 
 	<div class="footer">
-		<img id="signOutImage" src="/images/Sign-Out.png" alt="Sign Out" class="footer" onclick="signOutActionClickHandler();"/>
+		<img id="signOutImage" src="/images/Sign-Out.png" alt="Sign Out" class="footer container" onclick="signOutActionClickHandler();"/>
 	</div>
 		
 </body>
