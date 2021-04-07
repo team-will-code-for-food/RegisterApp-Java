@@ -39,5 +39,5 @@ function getProductSalesReportActionElement() {
 }
 
 function getCashierSalesReportActionElement() {
-	return document.getElementById("cashierReport");
+	return document.getElementById("cashiersReport");
 }
