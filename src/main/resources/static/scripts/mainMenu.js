@@ -1,47 +1,43 @@
-// This is the functionality for the main menu.
-import{SignOutActionClickHandler} from './master.js';
+document.addEventListener("DOMContentLoaded", function(event) {
+	getStartTransactionActionElement().addEventListener(
+		"click",
+		() => { displayError("Functionality has not yet been implemented."); });
 
-document.addEventListener("DOMContentLoaded", function(event) 
-{
-	startTransaction.addEventListener("click", transactionActionElement);
+	getViewProductsActionElement().addEventListener(
+		"click",
+		() => { window.location.assign("/productListing"); });
 
-	viewProducts.addEventListener("click", productsActionElement);
+	getCreateEmployeeActionElement().addEventListener(
+		"click",
+		() => { window.location.assign("/employeeDetail"); });
 
-	createEmployee.addEventListener("click", employeeActionElement);
+	getProductSalesReportActionElement().addEventListener(
+		"click",
+		() => { displayError("Functionality has not yet been implemented."); });
 
-	salesReport.addEventListener("click", productSalesReportActionElement);
+	getCashierSalesReportActionElement().addEventListener(
+		"click",
+		() => { displayError("Functionality has not yet been implemented."); });
 
-	cashiersReport.addEventListener("click", cashierSalesReportActionElement);
-
-	signOut.addEventListener("click", signOutActionElement); // signOut is the id of the sign out button
-	
 });
 
-
-function transactionActionElement() {
-	document.getElementById("errorMessage").innerHTML = "Functionality has not yet been implemented";
+// Getters and setters
+function getViewProductsActionElement() {
+	return document.getElementById("viewProducts");
 }
 
-function productsActionElement() {
-	window.location.href = "\productListing.html"; // go to the product listing page
+function getCreateEmployeeActionElement() {
+	return document.getElementById("createEmployee");
 }
 
-function employeeActionElement() {
-	window.location.href = "\employeeDetails.html"; // go to the employee detail page
+function getStartTransactionActionElement() {
+	return document.getElementById("startTransaction");
 }
 
-function productSalesReportActionElement() {
-	document.getElementById("errorMessage").innerHTML = "Functionality has not yet been implemented";
-
+function getProductSalesReportActionElement() {
+	return document.getElementById("salesReport");
 }
 
-function cashierSalesReportActionElement() {
-	document.getElementById("errorMessage").innerHTML = "Functionality has not yet been implemented";
-
-}
-
-function signOutActionElement() {
-	SignOutActionClickHandler();
-	window.location.href = "\signIn.html"; // Go to the sign in page
-
+function getCashierSalesReportActionElement() {
+	return document.getElementById("cashiersReport");
 }

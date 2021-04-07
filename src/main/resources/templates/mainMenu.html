@@ -23,16 +23,16 @@
 
 		<div class="mainMenuActionsWrapper">
 			<br />
-			<button id="startTransaction" type="button" class="action" title="Functionality Not Available">Start Transaction</button>
+			<button id="startTransaction" type="button" class="action container" title="Functionality Not Available">Start Transaction</button>
 			<br /><br />
-			<button id="viewProducts" type="button" class="action">View Products</button>
+			<button id="viewProducts" type="button" class="action container">View Products</button>
 			<div th:class="not ${isElevatedUser} ? hidden : ''">
 				<br />
-				<button id="createEmployee" type="button" class="action">Create Employee</button>
+				<button id="createEmployee" type="button" class="action container">Create Employee</button>
 				<br /><br />
-				<button id="salesReport" type="button" class="action" title="Functionality Not Available">Product Sales</button>
+				<button id="salesReport" type="button" class="action container" title="Functionality Not Available">Product Sales</button>
 				<br /><br />
-				<button id="cashiersReport" type="button" class="action" title="Functionality Not Available">Cashier Sales</button>
+				<button id="cashiersReport" type="button" class="action container" title="Functionality Not Available">Cashier Sales</button>
 			</div>
 		</div>
 	</div>
@@ -54,7 +54,7 @@
 	</div>
 
 	<div class="footer">
-		<img id="signOut" src="signOut-img.svg" alt="Sign Out" class="footer" />
+		<img id="signOutImage" src="/images/Sign-Out.png" alt="Sign Out" class="footer container" onclick="signOutActionClickHandler();"/>
 	</div>
 		
 </body>

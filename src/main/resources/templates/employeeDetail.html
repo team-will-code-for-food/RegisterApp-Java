@@ -11,11 +11,16 @@
 </head>
 
 <body>
+	<div id ="menuButton" class="container" onclick="goToMenu()">
+		<div class="bar1"></div>
+		<div class="bar2"></div>
+		<div class="bar3"></div>
+	  </div>
 
 	<div class="header">
 		<h1 class="primary-message">Employee Detail</h1>
 	</div>
-		
+
 	<div id="main" class="main">
 		<div id="error" th:class="${#strings.isEmpty(errorMessage)} ? hidden : ''">
 			<h4 id="errorMessage" class="error-message" th:text="${errorMessage}"></h4>
@@ -80,7 +85,7 @@
 
 		<div class="employeeActionsWrapper" th:classappend="not ${#strings.isEmpty(errorMessage)} ? hidden : ''">
 			<br />
-			<button id="saveButton" type="button" class="action">Save</button>
+			<button id="saveButton" type="button" class="action container">Save</button>
 		</div>
 
 		<div id="employeeSavedAlertModal" class="modal animate-opacity-show">
