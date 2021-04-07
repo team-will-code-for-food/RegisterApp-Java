@@ -28,8 +28,8 @@
 		</div>
 
 		<div class="productsWrapper">
-			<div>
-				<a href="/productDetail/" class="button container">Create New</a>
+			<div th:class="not ${isElevatedUser} ? hidden : ''">
+				<a href="/productDetail/" class="button">Create New</a>
 			</div>
 
 			<br /><br />
