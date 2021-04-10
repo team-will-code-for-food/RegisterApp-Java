@@ -15,14 +15,15 @@ import edu.uark.registerapp.models.entities.EmployeeEntity;
 import edu.uark.registerapp.models.repositories.EmployeeRepository;
 
 @Service
-public class DeleteEmployee implements VoidCommandInterface {
+public class EmployeeDeleteCommand implements VoidCommandInterface {
 	@Transactional
 	@Override
 	public void execute() {
 		final Optional<EmployeeEntity> employeeEntity =
-			this.employeeRepository.findById(this.employeeId); // Find the employee first
+			this.employeeRepository.findById(this.employeeId);// Find the employee first
+
 		if (!employeeEntity.isPresent()) { // No record with the associated record ID exists in the database.
-			throw new NotFoundException("Employee");
+			throw new NotFoundException("Product");
 		}
 
 		this.employeeRepository.delete(employeeEntity.get()); // Delete the employee if found
@@ -33,8 +34,8 @@ public class DeleteEmployee implements VoidCommandInterface {
 	public UUID getEmployeeId() {
 		return this.employeeId;
 	}
-	public DeleteEmployee setEmployeeId(final UUID employeeId) {
-		this.employeeId = employeeId;
+	public EmployeeDeleteCommand setEmployeeId(final UUID productId) {
+		this.employeeId = productId;
 		return this;
 	}
 	

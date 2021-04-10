@@ -1,81 +1,97 @@
+// This will update an employee
+
 package edu.uark.registerapp.commands.employees;
 
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import edu.uark.registerapp.commands.ResultCommandInterface;
 import edu.uark.registerapp.commands.exceptions.NotFoundException;
 import edu.uark.registerapp.commands.exceptions.UnprocessableEntityException;
-
 import edu.uark.registerapp.models.api.Employee;
 import edu.uark.registerapp.models.entities.EmployeeEntity;
 import edu.uark.registerapp.models.enums.EmployeeClassification;
 import edu.uark.registerapp.models.repositories.EmployeeRepository;
 
 @Service
-public class UpdateEmployee implements ResultCommandInterface<Employee> {
+public class EmployeeUpdateCommand implements ResultCommandInterface<Employee> 
+{
 	@Override
-	public Employee execute() {
+	public Employee execute() 
+	{
 		this.validateProperties();
-		
 		this.updateEmployeeEntity();
-
 		return this.apiEmployee;
 	}
 
-	// Exceptions for empty fields
-	private void validateProperties() {
-		if (StringUtils.isBlank(this.apiEmployee.getFirstName())) {
+	// Helper methods
+	// Validate incoming Employee request object, names should not be blank
+	private void validateProperties() 
+	{
+		if (StringUtils.isBlank(this.apiEmployee.getFirstName())) 
+		{
 			throw new UnprocessableEntityException("first name");
 		}
-		if (StringUtils.isBlank(this.apiEmployee.getLastName())) {
+		if (StringUtils.isBlank(this.apiEmployee.getLastName())) 
+		{
 			throw new UnprocessableEntityException("last name");
 		}
-		if (EmployeeClassification.map(this.apiEmployee.getClassification()) == EmployeeClassification.NOT_DEFINED) {
+		if (EmployeeClassification.map(this.apiEmployee.getClassification()) == EmployeeClassification.NOT_DEFINED) 
+		{
 			throw new UnprocessableEntityException("classification");
 		}
 	}
 
 	@Transactional
-	private void updateEmployeeEntity() {
+	private void updateEmployeeEntity() 
+	{
+		// Query employee entity from database
 		final Optional<EmployeeEntity> queriedEmployeeEntity =
 			this.employeeRepository.findById(this.employeeId);
 
-		if (!queriedEmployeeEntity.isPresent()) {
-			throw new NotFoundException("Employee"); // No record with the associated record ID exists in the database.
+		if (!queriedEmployeeEntity.isPresent()) 
+		{
+			// No record with the associated record ID exists in the database.
+			throw new NotFoundException("Employee"); 
 		}
-
-		this.apiEmployee = queriedEmployeeEntity.get()
-			.synchronize(this.apiEmployee); // Synchronize any incoming changes for UPDATE to the database.
-
-		this.employeeRepository.save(queriedEmployeeEntity.get()); // Write, via an UPDATE, any changes to the database.
+		// Update queried employee entity with date from incoming Employee object
+		this.apiEmployee = queriedEmployeeEntity.get().synchronize(this.apiEmployee); 
+		// Save updated employee entity
+		this.employeeRepository.save(queriedEmployeeEntity.get()); 
 	}
 
-	// Getter and Setters for the universally unique Identifies that tuple
+	// Properties
+	// Getters and Setters for the universally unique Identifiers of that tuple
 	private UUID employeeId;
-	public UUID getEmployeeId() {
+	public UUID getEmployeeId() 
+	{
 		return this.employeeId;
 	}
-	public UpdateEmployee setEmployeeId(final UUID employeeId) {
+	public EmployeeUpdateCommand setEmployeeId(final UUID employeeId) 
+	{
 		this.employeeId = employeeId;
 		return this;
 	}
 
 	// Getters and Setters for the API
+	// Return updated data of the Employee object
 	private Employee apiEmployee;
-	public Employee getApiEmployee() {
+	public Employee getApiEmployee() 
+	{
 		return this.apiEmployee;
 	}
-	public UpdateEmployee setApiEmployee(final Employee apiEmployee) {
+	public EmployeeUpdateCommand setApiEmployee(final Employee apiEmployee) 
+	{
 		this.apiEmployee = apiEmployee;
 		return this;
 	}
-	
+
 	@Autowired
 	private EmployeeRepository employeeRepository;
 }
